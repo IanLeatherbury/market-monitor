@@ -1,50 +1,59 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Market Monitor Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. TypeScript First
+All code must be written in TypeScript with strict mode enabled. No `any` types without explicit justification. Type definitions must be clear and maintainable.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Component-Based Architecture
+UI built with React components following Next.js App Router conventions. Components should be focused, reusable, and properly typed. Server and Client components must be explicitly designated.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. File-Based Routing
+Follow Next.js App Router structure (`app/` directory). Routes defined by folder structure with `page.tsx` files. No custom routing logic unless absolutely necessary.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Performance & Core Web Vitals
+Optimize for Core Web Vitals (LCP, FID, CLS). Use Next.js Image component for images. Implement proper loading states and error boundaries. Lazy load non-critical components.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Accessibility & Standards
+Semantic HTML required. ARIA labels where necessary. Keyboard navigation support. Responsive design for mobile and desktop.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technical Standards
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Code Quality
+- ESLint configuration must pass without errors
+- Consistent formatting (Prettier or equivalent)
+- Meaningful variable and function names
+- Comments for complex logic only
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Dependencies
+- Keep dependencies minimal and up-to-date
+- Prefer established, well-maintained packages
+- Document why each major dependency is needed
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Environment & Configuration
+- Environment variables for all configuration
+- Never commit secrets or API keys
+- Use `.env.local` for local development
+
+## Development Workflow
+
+### Version Control
+- Meaningful commit messages
+- Small, focused commits
+- Branch off `main` for new features
+
+### Testing & Validation
+- Test critical user flows
+- Verify builds succeed before deployment
+- Check for TypeScript errors regularly
+
+### Deployment
+- Build must succeed without errors or warnings
+- Environment variables properly configured
+- Verify functionality in production-like environment
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution defines the minimum standards for the Market Monitor project. All code changes must comply with these principles. Deviations require documentation and justification.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-02-10 | **Last Amended**: 2026-02-10
