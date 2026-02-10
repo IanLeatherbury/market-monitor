@@ -45,6 +45,7 @@
 - [ ] T018 [US3] Add hover effects and refined typography to `components/Sidebar.tsx`
 - [ ] T019 [US3] Ensure scroll handling for sidebar if list exceeds viewport in `components/LayoutShell.tsx`
 - [ ] T020 [US3] Optimization: Memoize sidebar list to prevent unnecessary re-renders in `components/Sidebar.tsx`
+- [ ] T023 [US3] Ensure keyboard navigation support (Enter/Space to select) in `components/Sidebar.tsx`
 
 ## Phase 6: Polish
 *Goal: Final visual adjustments and responsive constraints*
