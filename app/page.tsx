@@ -55,7 +55,7 @@ export default function Home() {
 
   const selectedTicker = tickers.find(t => t.symbol === selectedSymbol);
 
-  if (loading && tickers.length === 0) {
+  if (loading) {
      return (
        <LayoutShell>
          <div className="flex h-full w-full items-center justify-center bg-background text-subtext font-mono">
