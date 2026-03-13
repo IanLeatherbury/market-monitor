@@ -5,7 +5,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { ChartPanel } from '@/components/ChartPanel';
 import { MarketOverview } from '@/components/MarketOverview';
 import { massiveProvider } from '@/lib/massiveProvider';
-import { Ticker, PricePoint, Tab } from '@/lib/types';
+import { Ticker, OHLCPoint, Tab, TimeRange } from '@/lib/types';
 import { RefreshCw } from 'lucide-react';
 
 function TopNav({ activeTab, onTabChange, onRefresh }: { activeTab: Tab; onTabChange: (t: Tab) => void; onRefresh: () => void }) {
@@ -59,7 +59,8 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [tickers, setTickers] = useState<Ticker[]>([]);
   const [selectedSymbol, setSelectedSymbol] = useState<string>('');
-  const [chartData, setChartData] = useState<PricePoint[]>([]);
+  const [chartData, setChartData] = useState<OHLCPoint[]>([]);
+  const [chartRange, setChartRange] = useState<TimeRange>('1M');
   const [loading, setLoading] = useState(true);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -81,14 +82,14 @@ export default function Home() {
     loadTickers();
   }, [refreshKey]);
 
-  // Fetch chart data when selection changes
+  // Fetch chart data when selection or range changes
   useEffect(() => {
     if (!selectedSymbol) return;
     let active = true;
 
     async function fetchData() {
        try {
-         const series = await massiveProvider.getSeries(selectedSymbol);
+         const series = await massiveProvider.getOHLC(selectedSymbol, chartRange);
          if (active) {
            setChartData(series);
          }
@@ -99,7 +100,7 @@ export default function Home() {
     fetchData();
 
     return () => { active = false; };
-  }, [selectedSymbol]);
+  }, [selectedSymbol, chartRange]);
 
   const selectedTicker = tickers.find(t => t.symbol === selectedSymbol);
 
@@ -135,7 +136,9 @@ export default function Home() {
           />
           {selectedTicker ? (
             <main className="flex-1 overflow-hidden bg-background">
-              <ChartPanel ticker={selectedTicker} data={chartData} />
+              <div className="mx-auto max-w-7xl h-full">
+                <ChartPanel ticker={selectedTicker} data={chartData} range={chartRange} onRangeChange={setChartRange} />
+              </div>
             </main>
           ) : (
             <div className="flex flex-1 items-center justify-center text-subtext">

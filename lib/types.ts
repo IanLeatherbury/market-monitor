@@ -10,6 +10,15 @@ export interface PricePoint {
   value: number;
 }
 
+export interface OHLCPoint {
+  time: string | number; // YYYY-MM-DD for daily+, Unix seconds for intraday
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
+
 export type TimeRange = '1D' | '1W' | '1M' | '3M' | '1Y';
 
 export interface SectorRow {

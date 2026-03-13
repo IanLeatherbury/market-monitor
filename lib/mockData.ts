@@ -1,5 +1,5 @@
 import { DataProvider } from './dataProvider';
-import { Ticker, PricePoint, TimeRange } from './types';
+import { Ticker, PricePoint, OHLCPoint, TimeRange } from './types';
 
 const MOCK_TICKERS: string[] = [
   'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'TSLA', 'META', 'BRK.B', 'TSM', 'UNH',
@@ -59,6 +59,18 @@ export class MockDataProvider implements DataProvider {
     // Let's generate consistent seed based on symbol?
     // For now random is fine for visual demo as long as it looks like a graph.
     return generateSeries(basePrice);
+  }
+
+  async getOHLC(symbol: string, range: TimeRange = '1D'): Promise<OHLCPoint[]> {
+    const series = await this.getSeries(symbol, range);
+    return series.map((p) => ({
+      time: p.timestamp.slice(0, 10),
+      open: p.value,
+      high: p.value * 1.01,
+      low: p.value * 0.99,
+      close: p.value,
+      volume: Math.floor(Math.random() * 1000000),
+    }));
   }
 }
 
